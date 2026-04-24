@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* ── COLORES DE FONDO ────────────────────────────────────── */
+  --color-dark:   #1a1020;   /* bg-dark   → fondo principal */
+  --color-dark-2: #241530;   /* bg-dark-2 → fondo de cards */
+  --color-dark-3: #2e1b3a;   /* bg-dark-3 → secciones alternas */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* ── FAMILIA ROSE (rosa) ─────────────────────────────────── */
+  --color-rose:         #e8a0b0;  /* text-rose, border-rose */
+  --color-rose-dark:    #c9627e;  /* bg-rose-dark (botones) */
+  --color-rose-light:   #f5d0dc;  /* text-rose-light */
+  --color-rose-neon:    #ff6b9d;  /* glows y highlights */
+
+  /* ── FAMILIA GOLD (dorado) ───────────────────────────────── */
+  --color-gold:         #d4a96a;  /* text-gold */
+  --color-gold-light:   #f0d5a8;  /* text-gold-light */
+  --color-gold-neon:    #ffc857;  /* text-gold-neon (precios) */
+
+  /* ── TEXTO ───────────────────────────────────────────────── */
+  --color-text-primary: #f0e8f0;  /* text-text-primary */
+  --color-text-muted:   #b89ab8;  /* text-text-muted */
+
+  /* ── FUENTE ──────────────────────────────────────────────── */
+  /* next/font inyecta --font-inter en el <html>.
+     Aquí le decimos a Tailwind que font-sans use esa variable. */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* ── ANIMACIONES ─────────────────────────────────────────── */
+
+  /* Partículas flotantes del fondo */
+  --animate-float: float linear infinite;
+  @keyframes float {
+    0%   { transform: translateY(100vh) rotate(0deg);    opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.2; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  /* Pulso de glow en botones CTA */
+  --animate-glow-pulse: glowPulse 2.5s ease-in-out infinite;
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.3); }
+    50%       { box-shadow: 0 0 40px rgba(255, 107, 157, 0.7); }
+  }
+
+  /* Gradiente animado (hero background) */
+  --animate-gradient-shift: gradientShift 8s ease infinite;
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%;   }
+    50%       { background-position: 100% 50%; }
   }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   VARIABLES CSS GLOBALES
+   Estas son para uso directo en style={{ }} inline en los
+   componentes. Funcionan en paralelo con los tokens de @theme.
+   ══════════════════════════════════════════════════════════════ */
+:root {
+  --neon-rose:    #ff6b9d;
+  --neon-gold:    #ffc857;
+  --rose-dark:    #c9627e;
+  --gold:         #d4a96a;
+  --dark:         #1a1020;
+  --dark-2:       #241530;
+  --dark-3:       #2e1b3a;
+  --text-primary: #f0e8f0;
+  --text-muted:   #b89ab8;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESET Y ESTILOS BASE
+   ══════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1a1020;
+  color: #f0e8f0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+  /* Antialiasing para texto más nítido */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── SCROLLBAR PERSONALIZADA ────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #241530; }
+::-webkit-scrollbar-thumb { background: #c9627e; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #ff6b9d; }
+
+/* ── SELECCIÓN DE TEXTO ─────────────────────────────────────── */
+::selection {
+  background: rgba(201, 98, 126, 0.3);
+  color: #f5d0dc;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UTILIDADES PERSONALIZADAS
+   Clases CSS que no existen en Tailwind por defecto pero
+   necesitamos en múltiples componentes del proyecto.
+   ══════════════════════════════════════════════════════════════ */
+@layer utilities {
+
+  /* Texto con gradiente rose → gold
+     Uso: className="text-gradient" */
+  .text-gradient {
+    background: linear-gradient(135deg, var(--neon-rose), var(--neon-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Línea divisoria luminosa entre secciones
+     Uso: <div className="glow-line" /> */
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--rose-dark),
+      var(--gold),
+      transparent
+    );
+    opacity: 0.35;
+  }
+
+  /* Glassmorphism — blur + fondo semi-transparente
+     Uso: className="glass rounded-2xl p-6" */
+  .glass {
+    background: rgba(46, 27, 58, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(232, 160, 176, 0.12);
+  }
+
+  /* Glow de texto neón (rose)
+     Uso: className="neon-text" */
+  .neon-text {
+    text-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
+  }
+
+  /* Contenedor centrado con ancho máximo
+     Uso: className="max-width-container" */
+  .max-width-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
