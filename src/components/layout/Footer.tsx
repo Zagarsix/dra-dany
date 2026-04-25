@@ -49,9 +49,9 @@ const SocialIcon = ({ type }: { type: "ig" | "li" | "wa" | "gm" }) => {
 };
 
 const socialLinks = [
-  { type: "ig" as const,  label: "Instagram", href: "https://instagram.com/",  hoverStyle: { background: "linear-gradient(135deg, #405DE6, #C13584, #FD1D1D, #FCAF45)", color: "white" } },
-  { type: "li" as const,  label: "LinkedIn",  href: "https://linkedin.com/",   hoverStyle: { background: "#0A66C2", color: "white" } },
-  { type: "wa" as const,  label: "WhatsApp",  href: "https://wa.me/56912345678", hoverStyle: { background: "#25D366", color: "white" } },
+  { type: "ig" as const,  label: "Instagram", href: "https://instagram.com/danydent_odontoesthetic/",  hoverStyle: { background: "linear-gradient(135deg, #405DE6, #C13584, #FD1D1D, #FCAF45)", color: "white" } },
+  { type: "li" as const,  label: "LinkedIn",  href: "https://linkedin.com/in/daniela-pacheco-araya-716a32264/",   hoverStyle: { background: "#0A66C2", color: "white" } },
+  { type: "wa" as const,  label: "WhatsApp",  href: "https://wa.me/56973655180", hoverStyle: { background: "#25D366", color: "white" } },
   { type: "gm" as const,  label: "Gmail",     href: "mailto:dany.pacheco.a@gmail.com", hoverStyle: { background: "#EA4335", color: "white" } },
 ];
 
@@ -63,7 +63,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="border-t border-rose-DEFAULT/10 pt-12 pb-6 px-4"
+      className="border-t border-rose/10 pt-12 pb-6 px-4"
       style={{ background: "rgba(15, 8, 20, 0.97)" }}
     >
       <div className="max-w-6xl mx-auto">
@@ -87,11 +87,11 @@ export default function Footer() {
               Tu bienestar y confianza son nuestra prioridad.
             </p>
             <p className="text-text-muted text-xs mb-1">
-              📍 Av. Nueva Providencia 1881, Of. X<br />
+              📍 Av. Nueva Providencia 1881,<br />
               Providencia, Santiago
             </p>
             <p className="text-text-muted text-xs">
-              📞 +56 9 XXXX XXXX
+              📞 +56 9 73655180
             </p>
 
             {/* Redes sociales */}
@@ -203,7 +203,7 @@ export default function Footer() {
             Diseñado y desarrollado por{" "}
             <a href="https://github.com/Zagarsix"
                target="_blank" rel="noopener noreferrer"
-               className="text-rose-DEFAULT hover:underline">
+               className="text-rose hover:underline">
               Zagarsix
             </a>{" "}
             · Santiago, Chile

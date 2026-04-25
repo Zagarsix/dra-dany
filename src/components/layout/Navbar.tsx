@@ -46,7 +46,7 @@ export default function Navbar() {
                     onClick={e => { e.preventDefault(); scrollToSection("#inicio"); }}
                     className="flex items-center gap-2.5 z-10"
                 >
-                    {/* Logo PNG — cuando lo tengas, reemplaza el placeholder */}
+                    {/* Logo PNG — cuando lo tengas, reemplaza el placeholder 
                     <div
                         className="w-10 h-10 rounded-full flex items-center justify-center
                         text-xl font-bold text-white"
@@ -56,14 +56,14 @@ export default function Navbar() {
                         }}
                     >
                         DP
-                    </div>
-                    {/* Cuando tengas logo.png, descomenta esto:
-          <Image src="/logo.png" alt="Dra. Daniela Pacheco" width={40} height={40} />
-          */}
+                    </div>*/}
+        
+          <Image src="/logo-dd.png" alt="Dra. Daniela Pacheco" width={40} height={40} />
+          
                     <span className="text-lg font-bold text-text-primary hidden sm:block">
                         Dra. <span className="text-rose+"
                             style={{ textShadow: "0 0 15px rgba(255,107,157,0.5)" }}>
-                            Daniela
+                            Dany
                         </span>
                     </span>
                 </a>
